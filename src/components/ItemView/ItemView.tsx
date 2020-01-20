@@ -5,7 +5,8 @@ import ApplicationContext from "../../context/ApplicationContext";
 import {
   ItemDetails,
   ApiError,
-  FetchPhotosDetailsResponse
+  FetchPhotosDetailsResponse,
+  ContextValues
 } from "../../types/types";
 import { fetchphotoDetails } from "../../services/api-service";
 import PhotoDetails from "../PhotoDetails/PhotoDetails";
@@ -13,8 +14,8 @@ import ButtonComponent from "../ButtonComponent/ButtonComponent";
 import ErrorAlert from "../ErrorAlert/ErrorAlert";
 
 const ItemView: React.FC = props => {
-  const photoId = get(props, "match.params.id");
-  const { setIsLoading } = useContext(ApplicationContext);
+  const photoId: string = get(props, "match.params.id");
+  const { setIsLoading } = useContext<ContextValues>(ApplicationContext);
   const [error, setError] = useState<ApiError | null>(null);
   const [photo, setPhoto] = useState<ItemDetails | null>(null);
 

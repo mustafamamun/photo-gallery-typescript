@@ -60,7 +60,7 @@ const Pagination: React.FC<PaginationProps> = ({
           className={"btn mr-1 mr-1 pb-0 pt-0 pr-1 pl-1 shadow-none"}
         />
       )}
-      {get(linkHeader, "last") && (
+      {get(linkHeader, "next") && (
         <ButtonComponent
           text={"next"}
           onSelect={() => onPageSelect(nextPage)}
