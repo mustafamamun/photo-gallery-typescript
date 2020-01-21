@@ -3,11 +3,6 @@ export type ApiError = {
   message: string;
 };
 
-export type ContextValues = {
-  setIsLoading: (value: boolean) => void;
-  isLoading: boolean;
-};
-
 export type ItemDetails = {
   albumId: number;
   id: number;

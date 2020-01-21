@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, useContext } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import { isEmpty } from "lodash";
 import { fetchphotos } from "../../services/api-service";
@@ -12,15 +12,15 @@ import { limits } from "../../config/app-config";
 import PhotoGrid from "../PhotoGrid/PhotoGrid";
 import Pagination from "../Pagination/Pagination";
 import PageLimit from "../Limits/Limit";
-import ApplicationContext from "../../context/ApplicationContext";
 import ErrorAlert from "../ErrorAlert/ErrorAlert";
+import LoadingComponent from "../LoadingComponent/LoadingComponent";
 
 const GalleryView: React.FC = () => {
   const ONE: number = 1;
   const locStIdCurPg: string = "photo_gallery_current_page";
   const locStIdLim: string = "photo_gallery_limit";
-  const { isLoading, setIsLoading } = useContext(ApplicationContext);
   const [error, setError] = useState<ApiError | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [photos, setPhotos] = useState<Array<ListItem>>([]);
   const [linkHeader, setLinkHeader] = useState<LinkHeader | null>(null);
   const [currentPage, setCurrentPage] = useState<number>(
@@ -65,14 +65,17 @@ const GalleryView: React.FC = () => {
   const onRetry = (): void => {
     fetchphotosHook();
   };
-  return !isLoading ? (
+  return (
     <div className="text-center">
       {error ? (
         <ErrorAlert onRetry={onRetry} error={error} className="mt-5 pt-5" />
       ) : (
         <div>
           <h1 className="mt-5">Photo Gallery</h1>
-          <PhotoGrid className="justify-content-center" photos={photos} />
+          <LoadingComponent isLoading={isLoading} />
+          {!isLoading && (
+            <PhotoGrid className="justify-content-center" photos={photos} />
+          )}
           {!isEmpty(photos) && (
             <Row className={"mt-5 mb-3"}>
               <Col md={8} xs={12}>
@@ -96,6 +99,6 @@ const GalleryView: React.FC = () => {
         </div>
       )}
     </div>
-  ) : null;
+  );
 };
 export default GalleryView;
