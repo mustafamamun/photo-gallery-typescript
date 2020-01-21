@@ -24,7 +24,6 @@ const PhotoDetails: React.FC<PhotoDetailsProps> = ({
           {format(get(itemDetails, "timeStamp", 0), "yyyy-MM-dd HH:mm")}
         </div>
       )}
-      ;
       <div>
         <Image src={get(itemDetails, "url", "")} />
       </div>
