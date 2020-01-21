@@ -31,7 +31,6 @@ export const fetchphotos = async (
         linkHeader: parsedLinkHeader,
         error: null
       };
-      return response;
     } else {
       response = {
         photos: [],
@@ -41,7 +40,6 @@ export const fetchphotos = async (
           message: getStatusText(apiResponse.status)
         }
       };
-      return response;
     }
   } catch (error) {
     response = {
@@ -52,8 +50,8 @@ export const fetchphotos = async (
         message: getStatusText(INTERNAL_SERVER_ERROR)
       }
     };
-    return response;
   }
+  return response;
 };
 
 export const fetchphotoDetails = async (
@@ -69,7 +67,6 @@ export const fetchphotoDetails = async (
         photoDetails: parsedPhoto,
         error: null
       };
-      return response;
     } else {
       response = {
         photoDetails: null,
@@ -78,7 +75,6 @@ export const fetchphotoDetails = async (
           message: getStatusText(apiResponse.status)
         }
       };
-      return response;
     }
   } catch (error) {
     response = {
@@ -88,6 +84,6 @@ export const fetchphotoDetails = async (
         message: getStatusText(INTERNAL_SERVER_ERROR)
       }
     };
-    return response;
   }
+  return response;
 };
